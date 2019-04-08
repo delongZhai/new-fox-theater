@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+      apiKey: "AIzaSyBenoOCjGP1QYLZPuDYPzXGlbdwlxT1RvQ",
+      authDomain: "login-7d2d2.firebaseapp.com",
+      databaseURL: "https://login-7d2d2.firebaseio.com",
+      projectId: "login-7d2d2",
+      storageBucket: "login-7d2d2.appspot.com",
+      messagingSenderId: "616333953602"
+  };
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+  }
+  </script>
+  
+  <!-- Firebase App is always required and must be first -->
+  <script defer src="https://www.gstatic.com/firebasejs/5.9.2/firebase-app.js"></script>
+
+  <!-- Add additional services that you want to use -->
+  <script defer src="https://www.gstatic.com/firebasejs/5.9.2/firebase-auth.js"></script>
+  <script defer src="/__/firebase/init.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login / Create Account</title>
+  <script src="scripts/app.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137796022-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-137796022-1');
+  </script>
+</head>
+<body>
+  <!-- The surrounding HTML is left untouched by FirebaseUI.
+     Your app may use that space for branding, controls and other customizations.-->
+  <div class="nav">
+    <div class="logo">
+      <!-- TODO: Logo here -->
+      <img src="image/logo.png" alt="Company's Logo">
+    </div>
+    <div class="anchor">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Show</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>  
+    <div class="profile">
+      <button id="person">      
+        <img src="image/account.png" alt="">
+      </button>
+      <div class="modal account-details">
+        <div class="modal-content">
+            <h3>Welcome, Username</h3>
+            <h5>You have 1 upcoming shows</h5>
+            <div class="userEvents">
+              <p>Aladdin</p>
+              <p>Monday, April 1st</p>
+              <p>7 <span>PM</span></p>
+            </div>
+            <button id="signin">Sign In</button>
+            <button id="signout">Sign Out</button>
+        </div>
+      </div>
+      <div id="firebaseui-auth-container"></div>
+    </div>
+  </div>
+</body>
+</html>

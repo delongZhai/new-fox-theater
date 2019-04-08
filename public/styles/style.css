@@ -1,0 +1,88 @@
+body {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 16px;
+  margin: 0%;
+  padding: 0%;
+  height: 100vh;
+  background: #FFFFFF;
+  overflow: y;
+}
+
+div.nav {
+  float: left;
+  height: 57px;
+  width: 100vw;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+}
+
+div.logo img{
+  width: 90px;
+  position: relative;
+  top: -8px;
+  left: 20px;
+}
+
+div.anchor, div.logo {
+  display: inline;
+}
+
+ul {
+  list-style-type: none;
+  display: inline;
+  margin: 0;
+  padding: 10px;
+  overflow: hidden;
+  background-color: #333;
+  position: absolute;
+  top: 0px;
+  left: 110px;
+  font-size: 2em;
+}
+
+li {
+  display: inline;
+}
+
+li a {
+  /* display: block; */
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.person img {
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  font-size: 50px;
+  padding: 4px 0px;
+  color: #ffffff;
+}
+
+li a:hover, ion-icon:hover {
+  background-color: rgb(225, 241, 74);
+  color: #000000;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 100%;
+  right: 0;
+  margin: auto;
+}
+
+.modal-contents {
+  display: block;
+  background-color: #fefefe;
+  border: 3px solid #73AD21;
+  padding: 20px;
+  float: right;
+  width: 20%;
+}
