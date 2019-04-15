@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign In Page</title>
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBenoOCjGP1QYLZPuDYPzXGlbdwlxT1RvQ",
+        authDomain: "login-7d2d2.firebaseapp.com",
+        databaseURL: "https://login-7d2d2.firebaseio.com",
+        projectId: "login-7d2d2",
+        storageBucket: "login-7d2d2.appspot.com",
+        messagingSenderId: "616333953602"
+    };
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
+    </script>
+      <!-- Firebase App is always required and must be first -->
+    <script defer src="https://www.gstatic.com/firebasejs/5.9.2/firebase-app.js"></script>
+
+    <!-- Add additional services that you want to use -->
+    <script defer src="https://www.gstatic.com/firebasejs/5.9.2/firebase-auth.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+    <script src="scripts/login.js"></script>
+</head>
+<body>
+    <div id="firebaseui-auth-container"></div>
+
+
+</body>
+</html>

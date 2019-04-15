@@ -9,10 +9,13 @@ body {
 }
 
 div.nav {
+  -webkit-box-shadow: 0px 3px 22px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 3px 22px -5px rgba(0,0,0,0.75);
+  box-shadow: 0px 3px 22px -5px rgba(0,0,0,0.75);
   float: left;
   height: 57px;
   width: 100vw;
-  background-color: #333;
+  background-color: #ffffef;
   position: fixed;
   top: 0;
 }
@@ -34,7 +37,6 @@ ul {
   margin: 0;
   padding: 10px;
   overflow: hidden;
-  background-color: #333;
   position: absolute;
   top: 0px;
   left: 110px;
@@ -48,10 +50,11 @@ li {
 li a {
   /* display: block; */
   cursor: pointer;
-  color: white;
+  color: #000000;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  padding-left: 10px;
 }
 
 .person img {
@@ -69,20 +72,23 @@ li a:hover, ion-icon:hover {
   color: #000000;
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  top: 100%;
-  right: 0;
-  margin: auto;
-}
+.btn-signin { 
+  right: 35px;
+} 
 
-.modal-contents {
-  display: block;
-  background-color: #fefefe;
-  border: 3px solid #73AD21;
-  padding: 20px;
-  float: right;
-  width: 20%;
+button.btn.btn-signup { 
+  right: 150px;
+} 
+
+.btn {
+  color: #ffffff; 
+  background-color: #5B1DAD; 
+  border-color: #EEEDF2; 
+  font-size: 1.5em;
+  text-align: center;
+  padding: 5px 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  position: absolute;
+  top:8px;
 }

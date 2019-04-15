@@ -31,7 +31,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login / Create Account</title>
   <script src="scripts/app.js"></script>
-  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="stylesheet" type="text/css" href="styles/main.css" />
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137796022-1"></script>
@@ -60,23 +60,12 @@
       </ul>
     </div>  
     <div class="profile">
-      <button id="person">      
-        <img src="image/account.png" alt="">
+      <button class="btn btn-signin" onclick="handle_signin()">      
+        SIGN IN
       </button>
-      <div class="modal account-details">
-        <div class="modal-content">
-            <h3>Welcome, Username</h3>
-            <h5>You have 1 upcoming shows</h5>
-            <div class="userEvents">
-              <p>Aladdin</p>
-              <p>Monday, April 1st</p>
-              <p>7 <span>PM</span></p>
-            </div>
-            <button id="signin">Sign In</button>
-            <button id="signout">Sign Out</button>
-        </div>
-      </div>
-      <div id="firebaseui-auth-container"></div>
+      <button class="btn btn-signup"  onclick="handle_signin()">      
+        SIGN UP
+      </button>
     </div>
   </div>
 </body>
