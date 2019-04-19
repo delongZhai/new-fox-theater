@@ -15,7 +15,7 @@ div.nav {
   float: left;
   height: 57px;
   width: 100vw;
-  background-color: #ffffef;
+  background-color: #ffffff;
   position: fixed;
   top: 0;
 }
@@ -35,7 +35,7 @@ ul {
   list-style-type: none;
   display: inline;
   margin: 0;
-  padding: 10px;
+  padding: 5.5px;
   overflow: hidden;
   position: absolute;
   top: 0px;
@@ -52,9 +52,8 @@ li a {
   cursor: pointer;
   color: #000000;
   text-align: center;
-  padding: 14px 16px;
+  padding: 9px 16px;
   text-decoration: none;
-  padding-left: 10px;
 }
 
 .person img {
@@ -67,22 +66,17 @@ li a {
   color: #ffffff;
 }
 
-li a:hover, ion-icon:hover {
+li a:hover{
   background-color: rgb(225, 241, 74);
   color: #000000;
 }
 
 .btn-signin { 
-  right: 35px;
-} 
-
-button.btn.btn-signup { 
-  right: 150px;
-} 
-
-.btn {
   color: #ffffff; 
-  background-color: #5B1DAD; 
+  /* add a function in javascript to change display to none once user sign in, then change display to initial display */
+  /* display: none; */
+  /* TODO: change this */
+  background-color: #dc3545; 
   border-color: #EEEDF2; 
   font-size: 1.5em;
   text-align: center;
@@ -90,5 +84,19 @@ button.btn.btn-signup {
   cursor: pointer;
   border-radius: 10px;
   position: absolute;
+  top:5px;
+  right: 25px;
+} 
+
+#btn-profile{
+  visibility: hidden;
+  font-size: 1.5em;
+  text-align: center;
+  padding: 5px 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  position: absolute;
   top:8px;
+  right: 35px;
 }
+

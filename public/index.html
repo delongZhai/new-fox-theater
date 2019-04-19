@@ -3,18 +3,19 @@
 <head>
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
   <script>
-  // Initialize Firebase
-  var config = {
-      apiKey: "AIzaSyBenoOCjGP1QYLZPuDYPzXGlbdwlxT1RvQ",
-      authDomain: "login-7d2d2.firebaseapp.com",
-      databaseURL: "https://login-7d2d2.firebaseio.com",
-      projectId: "login-7d2d2",
-      storageBucket: "login-7d2d2.appspot.com",
-      messagingSenderId: "616333953602"
-  };
-  if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-  }
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBenoOCjGP1QYLZPuDYPzXGlbdwlxT1RvQ",
+        authDomain: "login-7d2d2.firebaseapp.com",
+        databaseURL: "https://login-7d2d2.firebaseio.com",
+        projectId: "login-7d2d2",
+        storageBucket: "login-7d2d2.appspot.com",
+        messagingSenderId: "616333953602"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
   </script>
   
   <!-- Firebase App is always required and must be first -->
@@ -26,11 +27,16 @@
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
+  <!-- Add bootstrap stylesheet and jquery-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login / Create Account</title>
-  <script src="scripts/app.js"></script>
   <link rel="stylesheet" type="text/css" href="styles/main.css" />
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -48,7 +54,6 @@
      Your app may use that space for branding, controls and other customizations.-->
   <div class="nav">
     <div class="logo">
-      <!-- TODO: Logo here -->
       <img src="image/logo.png" alt="Company's Logo">
     </div>
     <div class="anchor">
@@ -60,13 +65,25 @@
       </ul>
     </div>  
     <div class="profile">
-      <button class="btn btn-signin" onclick="handle_signin()">      
+      <button class="btn-signin" id="btn-signin" onclick="handle_signin()">      
         SIGN IN
       </button>
-      <button class="btn btn-signup"  onclick="handle_signin()">      
-        SIGN UP
-      </button>
+      <!-- Example single danger button -->
+      <div class="btn-group" id="btn-profile">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Welcome, <span id="profile-user-name"><strong>username</strong></span>
+        </button>
+        <div class="dropdown-menu">
+          <h3 class="dropdown-item">You have booked <span id="profile-user-ticket">2</span> <span id="sing_or_plur">tickets</span></h3>
+          <div class="dropdown-item">Another action</div>
+          <div class="dropdown-item">Something else here</div>
+          <div class="dropdown-divider"></div>
+          <button class="btn btn-signout" id="btn-signout" onclick="handle_signout()">SIGN OUT</button>        
+        </div>
+      </div>
     </div>
   </div>
+
+  <script src="scripts/app.js"></script>
 </body>
 </html>
