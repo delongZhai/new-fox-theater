@@ -73,8 +73,7 @@ function updateName(name){
         });
     }
     else{
-        var conca_user_name = "<strong>" + name + "</strong>";
-        show_username.innerHTML = conca_user_name;
+        show_username.innerHTML = "<strong>"+ firebase.auth().currentUser.displayName + "</strong>";
     }
 }
 
