@@ -1,6 +1,10 @@
+var db = firebase.firestore();
+var docRef = db.collection('users');
+
 // Creating variable
 var show_username = document.getElementById('profile-user-name');
 var user, name, email, photoUrl, uid, emailVerified;
+var date = new Date();
 
 
 // CONST variable: get signin and signout button into variable
@@ -49,10 +53,37 @@ function getCurrentUser(user){
         email = user.email;
         photoUrl = user.photoURL;
         emailVerified = user.emailVerified;
-        uid = user.uid;  
+        uid = user.uid; 
+
+        var dateString = String(date.getMonth()+1)+"/"+String(date.getDate())+"/"+String(date.getFullYear());
+
+        if(isNewUser(user)){
+            db.collection("users").doc(user.email).set({
+                Email: user.email,
+                Name: user.displayName,
+                EmailVerified: user.emailVerified,
+                photo: user.photoURL,
+                dateAdded: dateString
+            }, {merge:true})
+                .then(function(docRef) {
+                    console.log("Document written with ID: ", docRef);
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                }); 
+        }
     }
     else{
         console.log('There is no current user');
+    }
+}
+
+function isNewUser(u){
+    if(u.metadata.creationTime === u.metadata.lastSignInTime){
+        return true;
+    }
+    else{
+        return false;
     }
 }
 
@@ -76,6 +107,7 @@ function updateName(name){
         show_username.innerHTML = "<strong>"+ firebase.auth().currentUser.displayName + "</strong>";
     }
 }
+  
 
 
 

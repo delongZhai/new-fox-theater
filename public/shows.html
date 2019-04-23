@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+    <script src="scripts/init.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Shows</title>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="styles/shows.css" />
+
+</head>
+<body>
+    <!-- Navbar-->
+    <header class="nav">
+        <div class="logo">
+            <img src="image/logo.png" alt="Company's Logo">
+        </div>
+        <div class="anchor">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shows.html">Show</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>  
+        <div class="profile">
+            <button class="btn-signin" id="btn-signin" onclick="handle_signin()">      
+                SIGN IN
+            </button>
+          <!-- Example single danger button -->
+            <div class="btn-group" id="btn-profile">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Welcome, <span id="profile-user-name"><strong>username</strong></span>
+                </button>
+            <div class="dropdown-menu">
+                <h3 class="dropdown-item">You have booked <span id="profile-user-ticket">2</span> <span id="sing_or_plur">tickets</span></h3>
+                <div class="dropdown-item">Another action</div>
+                <div class="dropdown-item">Something else here</div>
+                <div class="dropdown-divider"></div>
+                <button class="btn btn-signout" id="btn-signout">SIGN OUT</button>        
+            </div>
+          </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="go-back">
+            <div class="row">
+                <button type="button" class="btn btn-info" onclick="handle_ui_reverse()">GO BACK</button>
+            </div>
+        </div>
+        <div id="show-list"></div>
+        <div id="show-detail">
+            <div class="row">
+                <div class="col-6" id="show-detail-datetime">
+                    <h2 id="show-title"></h2>
+                    <img src="image/no_image.jpg" alt="image coming soon">
+                    <p id="show-describe"></p>
+                </div>
+                <div class="col-6" id="show-detail-tiershop">
+                    <h4>Our site offers two date options</h4>
+                    <div id="show-dayandtime" class="show-y-margin">
+                        <h6>Which date do you want to buy?</h6>
+                        <select name="day" id="show-day" onchange="updateDate(this)" required></select>
+                        <p id="show-time"><span id="show-date"></span></p>
+                    </div>
+                    <div id="show-tier-select" class="show-y-margin">
+                        <h6>Which tier do you want?</h6>
+                        <input type="radio" name="tier" value="1" id="tier1">
+                        <label for="tier1">Tier 1 ($75)</label>
+                        <input type="radio" name="tier" value="2" id="tier2">
+                        <label for="tier2">Tier 2 ($100)</label>
+                        <input type="radio" name="tier" value="3" id="tier3">
+                        <label for="tier3">Tier 3 ($125)</label>
+                    </div>
+                    <div id="show-ticket-quantity" class="show-y-margin">
+                        <label for="ticketQuan"># of Ticket</label>
+                        <input type="number" name="quantity" placeholder="1" id="ticketQuan" min="1" required>
+                    </div>
+                    <div id="decision" class="show-y-margin">
+                        <button class="btn btn-primary" type="submit">
+                            CHECKOUT NOW
+                        </button>
+                        <button class="btn btn-light" type="submit">
+                            <i class="fas fa-shopping-cart"></i>
+                            ADD CART
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="/__/firebase/5.10.0/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="/__/firebase/5.10.0/firebase-auth.js"></script>
+    <script src="/__/firebase/5.10.0/firebase-firestore.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script src="scripts/app-auth.js"></script>
+    <script src="scripts/app-showList.js"></script>
+
+</body>
+</html>
