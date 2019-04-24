@@ -17,6 +17,10 @@ var show_time = document.getElementById("show-time");
 var show_day = document.getElementById("show-day");
 var numShows = document.getElementsByClassName("col");
 var show_date = document.getElementById("show-date");
+var tier_chosen = document.getElementById("show-tier-select");
+var ticket_quan = document.getElementById("ticketQuan");
+var shoppingCart = document.getElementById("toShopCart");
+var checkout = document.getElementById("checkout");
 
 
 var arrEvent = [];
@@ -58,21 +62,25 @@ function reassign_day(){
     }
 }
 
-function updateDate(selectObj){
+function updateDate(sel){
     reassign_day();
-    var val = this.value;  
 
-    if(val == "this_week"){
-        show_date.innerHTML += moment().day(day).format("dddd, MMMM Do YYYY");
+    if(sel.options[sel.selectedIndex].value == "this_week"){
+        console.log("select is this_week");
+        show_date.innerHTML = moment().day(day).format("dddd, MMMM Do YYYY");
     }
-    if(val == "next_week"){
-        show_date.innerHTML += moment().day(day + 7).format("dddd, MMMM Do YYYY");
+    else if(sel.options[sel.selectedIndex].value == "next_week"){
+        console.log("select is next_week");
+        show_date.innerHTML = moment().day(day + 7).format("dddd, MMMM Do YYYY");
     }
-    if(val == "two_weeks"){
-        show_date.innerHTML += moment().day(day + 14).format("dddd, MMMM Do YYYY");
+    else if(sel.options[sel.selectedIndex].value == "two_weeks"){
+        console.log("select is two_weeks");
+        show_date.innerHTML = moment().day(day + 14).format("dddd, MMMM Do YYYY");
+    }
+    else{
+        console.log("unexpected selection");
     }
 }
-
 
 // Get document from collection "shows"
 db.collection("shows").where("onShowList", "==", true)
@@ -94,6 +102,53 @@ db.collection("shows").where("onShowList", "==", true)
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
+
+
+const addShoppingCart = function(){
+    if(firebase.auth().currentUser){
+        var user_id = return_email();
+        var tierPrice = checkSelectedTier();
+        var itemSubtotal = tierPrice * ticket_quan.value;
+    
+        db.collection("users").doc(user_id).collection("shoppingCarts").add({
+            Date: show_date.innerHTML,
+            Time: show_time.innerHTML,
+            TierPrice: tierPrice,
+            Quantity: ticket_quan.value,
+            itemSubtotal: itemSubtotal
+        })
+        .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+            ticket_quan.value = "";
+            reset_tier();
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+    }
+    else{
+        document.getElementById("alert-primary").style.display = "block";
+    }
+};
+
+function return_email(){
+    return firebase.auth().currentUser.email;
+}
+
+function checkSelectedTier(){
+    var tier_price;
+    if(document.getElementById("tier1").checked){
+        tier_price = document.getElementById("tier1").value;
+    }
+    else if(document.getElementById("tier2").checked){
+        tier_price = document.getElementById("tier2").value;
+    }
+    else if(document.getElementById("tier3").checked){
+        tier_price = document.getElementById("tier3").value;
+    }
+    return tier_price;
+}
+
 
 function continue_to_details(){
     handle_ui_progress();
@@ -130,10 +185,6 @@ function flourish_with_date(){
     }
 }
 
-function clearField(input) {
-    if(input.value != "")
-       input.value="";
-};
 
 function load_show(e){
     var showIndex = e.slice(-1);
@@ -167,21 +218,26 @@ function handle_ui_reverse(){
     btnGoBack.style.display = 'none';
     // display for show list appears
     showList.style.display = 'block';
+    document.getElementById("alert-primary").style.display = "none";
 
-    function removeOptions(selectbox)
-    {
-        for(var i = selectbox.options.length - 1 ; i >= 0 ; i--)
-        {
-            selectbox.remove(i);
-        }
-    }
 
     removeOptions(show_day);
+    reset_tier();
+
+    document.getElementById('ticketQuan').value = "";
+}
+
+function removeOptions(selectbox){
+    for(var i = selectbox.options.length - 1 ; i >= 0 ; i--)
+    {
+        selectbox.remove(i);
+    }
+}
+
+function reset_tier(){
     document.getElementById("tier1").checked = false;
     document.getElementById("tier2").checked = false;
     document.getElementById("tier3").checked = false;
-
-    document.getElementById('ticketQuan').value = "";
 }
 
 function handle_ui_progress(){
@@ -191,5 +247,8 @@ function handle_ui_progress(){
     showDetail.style.display = 'block';
     btnGoBack.style.display = 'block';
 }
+
+
+
 
 

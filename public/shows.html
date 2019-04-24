@@ -70,16 +70,19 @@
                     <h4>Our site offers two date options</h4>
                     <div id="show-dayandtime" class="show-y-margin">
                         <h6>Which date do you want to buy?</h6>
-                        <select name="day" id="show-day" onchange="updateDate(this)" required></select>
-                        <p id="show-time"><span id="show-date"></span></p>
+                        <select name="day" id="show-day" onchange="updateDate(this)" required>
+                            <option>Please select day:</option>
+                        </select>
+                        <p id="show-time"></p>
+                        <p id="show-date"></p>
                     </div>
                     <div id="show-tier-select" class="show-y-margin">
                         <h6>Which tier do you want?</h6>
-                        <input type="radio" name="tier" value="1" id="tier1">
+                        <input type="radio" name="tier" value="75" id="tier1" required>
                         <label for="tier1">Tier 1 ($75)</label>
-                        <input type="radio" name="tier" value="2" id="tier2">
+                        <input type="radio" name="tier" value="100" id="tier2">
                         <label for="tier2">Tier 2 ($100)</label>
-                        <input type="radio" name="tier" value="3" id="tier3">
+                        <input type="radio" name="tier" value="125" id="tier3">
                         <label for="tier3">Tier 3 ($125)</label>
                     </div>
                     <div id="show-ticket-quantity" class="show-y-margin">
@@ -87,10 +90,13 @@
                         <input type="number" name="quantity" placeholder="1" id="ticketQuan" min="1" required>
                     </div>
                     <div id="decision" class="show-y-margin">
-                        <button class="btn btn-primary" type="submit">
+                            <div class="alert alert-primary" id="alert-primary" role="alert">
+                                <strong>You Haven't Logged In</strong>, please take a few seconds to sign in.
+                            </div>
+                        <button class="btn btn-primary" id="checkout" type="submit" onclick="addCart()">
                             CHECKOUT NOW
                         </button>
-                        <button class="btn btn-light" type="submit">
+                        <button class="btn btn-light" id="toShopCart" type="submit" onclick="addShoppingCart()">
                             <i class="fas fa-shopping-cart"></i>
                             ADD CART
                         </button>

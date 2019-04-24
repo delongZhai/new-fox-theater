@@ -101,4 +101,8 @@ li a:hover{
   right: 35px;
 }
 
+#alert-primary{
+  display: none;
+}
+
 
