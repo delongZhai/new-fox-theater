@@ -111,8 +111,8 @@ const addShoppingCart = function(){
         var itemSubtotal = tierPrice * ticket_quan.value;
     
         db.collection("users").doc(user_id).collection("shoppingCarts").add({
-            Date: show_date.innerHTML,
-            Time: show_time.innerHTML,
+            ShowDate: show_date.innerHTML,
+            ShowTime: selectedEvent.Time,
             TierPrice: tierPrice,
             Quantity: ticket_quan.value,
             itemSubtotal: itemSubtotal
@@ -121,6 +121,7 @@ const addShoppingCart = function(){
             console.log("Document written with ID: ", docRef.id);
             ticket_quan.value = "";
             reset_tier();
+            document.getElementById("alert-addCart").style.display = "block";
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);
@@ -219,16 +220,18 @@ function handle_ui_reverse(){
     // display for show list appears
     showList.style.display = 'block';
     document.getElementById("alert-primary").style.display = "none";
+    document.getElementById("alert-addCart").style.display = "none";
 
 
     removeOptions(show_day);
     reset_tier();
 
     document.getElementById('ticketQuan').value = "";
+    show_date.innerHTML = "";
 }
 
 function removeOptions(selectbox){
-    for(var i = selectbox.options.length - 1 ; i >= 0 ; i--)
+    for(var i = selectbox.options.length - 1 ; i >= 1 ; i--)
     {
         selectbox.remove(i);
     }
