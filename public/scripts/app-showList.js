@@ -66,19 +66,19 @@ function updateDate(sel){
     reassign_day();
 
     if(sel.options[sel.selectedIndex].value == "this_week"){
-        console.log("select is this_week");
         show_date.innerHTML = moment().day(day).format("dddd, MMMM Do YYYY");
     }
     else if(sel.options[sel.selectedIndex].value == "next_week"){
-        console.log("select is next_week");
         show_date.innerHTML = moment().day(day + 7).format("dddd, MMMM Do YYYY");
     }
     else if(sel.options[sel.selectedIndex].value == "two_weeks"){
-        console.log("select is two_weeks");
         show_date.innerHTML = moment().day(day + 14).format("dddd, MMMM Do YYYY");
     }
+    else if(sel.options[sel.selectedIndex].value == "Please select day:"){
+        show_date.innerHTML = "";
+    }
     else{
-        console.log("unexpected selection");
+        console.log("something unexpected happen in updateDate()");
     }
 }
 
@@ -92,7 +92,8 @@ db.collection("shows").where("onShowList", "==", true)
                 'Title': doc.data().Title,
                 'Description': doc.data().Description,
                 'Day': doc.data().Day[0],
-                "Time": doc.data().Time
+                "Time": doc.data().Time,
+                "imgPath": doc.data().imgPath
             };
             arrEvent.push(eventObject);
             showList.innerHTML += add_show_to_html(eventObject);
@@ -103,25 +104,30 @@ db.collection("shows").where("onShowList", "==", true)
         console.log("Error getting documents: ", error);
     });
 
-
 const addShoppingCart = function(){
     if(firebase.auth().currentUser){
         var user_id = return_email();
         var tierPrice = checkSelectedTier();
         var itemSubtotal = tierPrice * ticket_quan.value;
     
-        db.collection("users").doc(user_id).collection("shoppingCarts").add({
-            ShowDate: show_date.innerHTML,
-            ShowTime: selectedEvent.Time,
-            TierPrice: tierPrice,
-            Quantity: ticket_quan.value,
-            itemSubtotal: itemSubtotal
+        db.collection("users").doc(user_id).collection("shoppingCart").doc("default")
+        .update({
+            items: firebase.firestore.FieldValue.arrayUnion({
+                ShowName: selectedEvent.Title,
+                ShowDate: show_date.innerHTML,
+                ShowTime: selectedEvent.Time,
+                TierPrice: tierPrice,
+                Quantity: ticket_quan.value,
+                itemSubtotal: itemSubtotal
+            })
         })
-        .then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
+        .then(function() {
+            console.log("New items document is written");
             ticket_quan.value = "";
             reset_tier();
             document.getElementById("alert-addCart").style.display = "block";
+            setTimeout(function(){ document.getElementById("alert-addCart").style.display = "none"; }, 4000);
+            
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);
@@ -129,8 +135,19 @@ const addShoppingCart = function(){
     }
     else{
         document.getElementById("alert-primary").style.display = "block";
+        setTimeout(function(){document.getElementById("alert-primary").style.display = "none";}, 4000);
     }
 };
+
+// const directCheckout = function(){
+//     if(firebase.auth().currentUser){
+//         addShoppingCart();
+//         var windowObjectReference = window.open("checkout.html", "You are at Checkout", "_self");
+//     }
+//     else{
+//         document.getElementById("alert-primary").style.display = "block";
+//     }
+// };
 
 function return_email(){
     return firebase.auth().currentUser.email;
@@ -192,6 +209,7 @@ function load_show(e){
     selectedEvent = arrEvent[showIndex];
     show_title.innerHTML = arrEvent[showIndex].Title;
     show_describe.innerHTML = arrEvent[showIndex].Description;
+    document.getElementById("get-path").src = arrEvent[showIndex].imgPath;
     show_time.innerHTML = "You selected" + " at " + arrEvent[showIndex].Time;
     selected_index = showIndex;
 }
@@ -250,6 +268,7 @@ function handle_ui_progress(){
     showDetail.style.display = 'block';
     btnGoBack.style.display = 'block';
 }
+
 
 
 

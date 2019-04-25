@@ -38,15 +38,24 @@
             </button>
           <!-- Example single danger button -->
             <div class="btn-group" id="btn-profile">
-                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-danger dropdown-toggle" onclick="displayShoppingCart()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Welcome, <span id="profile-user-name"><strong>username</strong></span>
                 </button>
             <div class="dropdown-menu">
-                <h3 class="dropdown-item">You have booked <span id="profile-user-ticket">2</span> <span id="sing_or_plur">tickets</span></h3>
-                <div class="dropdown-item">Another action</div>
-                <div class="dropdown-item">Something else here</div>
+                <h4 class="dropdown-item">You have <span id="number"></span> in shopping cart</h4>
+                <div class="dropdown-item">
+                    <h5>Shopping Cart</h5>
+                    <div id="shoppingCart"></div>
+                </div>
+                <div class="dropdown-item">
+                    <h5>Booked Shows</h5>
+                    <div id="bookedShow"></div>
+                </div>
                 <div class="dropdown-divider"></div>
-                <button class="btn btn-signout" id="btn-signout">SIGN OUT</button>        
+                <button class="btn btn-signout" id="btn-signout">SIGN OUT</button>     
+                <button class="btn btn-primary" id="checkout" type="submit" target="_self">
+                    <a href="checkout.html">CHECKOUT NOW</a>
+                </button>   
             </div>
           </div>
         </div>
@@ -63,7 +72,8 @@
             <div class="row">
                 <div class="col-6" id="show-detail-datetime">
                     <h2 id="show-title"></h2>
-                    <img src="image/no_image.jpg" alt="image coming soon">
+                    <img id="get-path" src="image/no_image.jpg" alt="image coming soon">
+                    <hr>
                     <p id="show-describe"></p>
                 </div>
                 <div class="col-6" id="show-detail-tiershop">
@@ -96,8 +106,8 @@
                         <div class="alert alert-primary" id="alert-addCart" role="alert">
                             <p>You order has been added to the shopping cart.</div></p>
                         </div>
-                        <button class="btn btn-primary" id="checkout" type="submit" onclick="addCart()">
-                            CHECKOUT NOW
+                        <button class="btn btn-primary" id="checkout" type="submit" onclick="addShoppingCart()">
+                            <a href="checkout.html" id="checkoutPage">CHECKOUT NOW</a>
                         </button>
                         <button class="btn btn-light" id="toShopCart" type="submit" onclick="addShoppingCart()">
                             <i class="fas fa-shopping-cart"></i>

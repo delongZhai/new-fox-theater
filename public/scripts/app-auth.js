@@ -4,13 +4,17 @@ var docRef = db.collection('users');
 // Creating variable
 var show_username = document.getElementById('profile-user-name');
 var user, name, email, photoUrl, uid, emailVerified;
+var itemArray = [];
 var date = new Date();
-
 
 // CONST variable: get signin and signout button into variable
 const btnSignIn = document.getElementById('btn-signin');
 const btnSignOut = document.getElementById('btn-signout');
 const auth = firebase.auth();
+
+// dom variable for booked_shows, and shopping_cart
+var shopping_cart = document.getElementById("shoppingCart");
+var booked_show = document.getElementById("bookedShow");
 
 // add event listener
 btnSignOut.addEventListener("click", function(){
@@ -20,6 +24,10 @@ btnSignOut.addEventListener("click", function(){
         console.log("cannot sign out");
       });
 })
+
+function reload(){
+    location.reload();
+}
 
 //Handle Account Status
 firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -56,7 +64,6 @@ function getCurrentUser(user){
         uid = user.uid; 
 
         var dateString = String(date.getMonth()+1)+"/"+String(date.getDate())+"/"+String(date.getFullYear());
-
         if(isNewUser(user)){
             db.collection("users").doc(user.email).set({
                 Email: user.email,
@@ -65,17 +72,79 @@ function getCurrentUser(user){
                 photo: user.photoURL,
                 dateAdded: dateString
             }, {merge:true})
-                .then(function(docRef) {
-                    console.log("Document written with ID: ", docRef);
+                .then(function() {
+                    console.log("User Document has been create");
                 })
                 .catch(function(error) {
                     console.error("Error adding document: ", error);
                 }); 
+            
+            var shopRef = db.collection("users").doc(user.email).collection("shoppingCart").doc("default");
+            var bookRef = db.collection("users").doc(user.email).collection("bookedTickets").doc("default");
+
+            shopRef.get().then(function(doc){
+                if(!doc.exists){
+                    shopRef.set({
+                        items: [0]
+                    }, { merge: true }).then(function() {
+                        console.log("Shopping Cart Document has been create");
+                    })
+                    .catch(function(error) {
+                        console.error("Error adding document: ", error);
+                    }); 
+                }
+            });
+
+            shopRef.get().then(function(doc){
+                if(!doc.exists){
+                    bookRef.set({
+                        items: [0]
+                    }, { merge: true }).then(function() {
+                        console.log("Booked Ticket Document has been create");
+                    })
+                    .catch(function(error) {
+                        console.error("Error adding document: ", error);
+                    });
+                }
+            });
+
         }
+        else{
+            console.log('There is no current user');
+        }
+        displayShoppingCart();
     }
-    else{
-        console.log('There is no current user');
-    }
+}
+
+
+function displayShoppingCart(){
+    db.collection("users").doc(email).collection("shoppingCart").doc("default").get()
+    .then(function(doc){
+        if (doc.exists) {
+            var showClass = document.getElementsByClassName("shows").length;
+            if(showClass === (doc.data().items.length - 1)){
+                console.log("No items in shopping cart");
+            }
+            else if((doc.data().items.length- 1 - showClass) > 1){
+                // There are more document that's not added
+                for(var i = 1; i <= doc.data().items.length; i++){
+                    shopping_cart.innerHTML += `<div class="shows"><h5>${doc.data().items[i].ShowName}</h5><p>${doc.data().items[i].ShowDate} at ${doc.data().items[i].ShowTime}</p><p>${doc.data().items[i].Quantity} with a price of $${doc.data().items[i].TierPrice}</p><p><strong>Subtotal:</strong> $${doc.data().items[i].itemSubtotal}</p></div>`;
+                }
+            }
+            else if((doc.data().items.length - 1 - showClass) == 1){
+                shopping_cart.innerHTML = "";
+                for(var i = 1; i <= doc.data().items.length; i++){
+                    shopping_cart.innerHTML += `<div class="shows"><h5>${doc.data().items[i].ShowName}</h5><p>${doc.data().items[i].ShowDate} at ${doc.data().items[i].ShowTime}</p><p>${doc.data().items[i].Quantity} with a price of $${doc.data().items[i].TierPrice}</p><p><strong>Subtotal:</strong> $${doc.data().items[i].itemSubtotal}</p></div>`;
+                }
+            }
+            document.getElementById("number").innerHTML = doc.data().items.length - 1;
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
 }
 
 function isNewUser(u){
@@ -107,7 +176,11 @@ function updateName(name){
         show_username.innerHTML = "<strong>"+ firebase.auth().currentUser.displayName + "</strong>";
     }
 }
-  
+
+function return_email(){
+    return firebase.auth().currentUser.email;
+}
+
 
 
 
