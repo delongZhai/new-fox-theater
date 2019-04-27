@@ -19,8 +19,8 @@
 
 </head>
 <body>
-    <!-- Navbar-->
-    <header class="nav">
+    <!-- Navbar -- Needs to be consistent-->
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="logo">
             <img src="image/logo.png" alt="Company's Logo">
         </div>
@@ -36,9 +36,9 @@
             <button class="btn-signin" id="btn-signin" onclick="handle_signin()">      
                 SIGN IN
             </button>
-          <!-- Example single danger button -->
+            <!-- Example single danger button -->
             <div class="btn-group" id="btn-profile">
-                <button type="button" class="btn btn-danger dropdown-toggle" onclick="displayShoppingCart()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-primary dropdown-toggle" onclick="displayShoppingCart()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Welcome, <span id="profile-user-name"><strong>username</strong></span>
                 </button>
             <div class="dropdown-menu">
@@ -57,7 +57,7 @@
                     <a href="checkout.html">CHECKOUT NOW</a>
                 </button>   
             </div>
-          </div>
+            </div>
         </div>
     </header>
 
@@ -129,8 +129,8 @@
 
     <!-- Initialize Firebase -->
     <script src="/__/firebase/init.js"></script>
+
     <script src="scripts/app-auth.js"></script>
     <script src="scripts/app-showList.js"></script>
-
 </body>
 </html>

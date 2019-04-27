@@ -1,0 +1,129 @@
+.container{
+    padding: 50px 25px;
+}
+
+#slide1{
+    display: block;
+}
+
+#slide2{
+    display: none;
+}
+
+#slide3{
+    display: none;
+}
+
+h1{
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+h4, h3{
+    font-weight: 600;
+}
+
+.btn-info{
+    float: right;
+    position: relative;
+    bottom: 40px;
+}
+
+form{
+    margin: auto;
+    max-width: 600px;
+    padding: 0px 70px;
+}
+
+form:hover{
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+}
+
+form.col-6{
+    position: relative;
+    left: 90px;
+    top: 25px;
+}
+
+form h4{
+    margin-top: 20px;
+}
+
+form h3, form h4, form h6{
+    text-align: center;
+}
+form div{
+    display: block;
+}
+
+form label{
+    margin-left: 70px;
+    text-align: left;
+}
+
+form input{
+    margin-right: 50px;
+    float: right;
+    width: 225px;
+}
+
+.button-center button{
+    position: relative;
+    left: 170px;
+    margin: 30px 0px;
+}
+
+.right-align{
+    float: right;
+}
+
+ol{
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+#listItems .items{
+    position: relative;
+    top: 0;
+    width: 40%;
+    height: 150px;
+    display: block;
+    float: left;
+    background: azure;
+    padding: 10px;
+    margin: 20px 20px;
+}
+
+li div:last-of-type strong{
+    padding-right: 20px;
+}
+
+li div:first-of-type strong{
+    display: block;
+}
+
+li div:last-of-type h5{
+    text-decoration: underline;
+    display: inline;
+    text-align: right;
+}
+
+.items:hover{
+    -webkit-box-shadow: 0px 0px 3px 1px rgb(167, 223, 213);
+    -moz-box-shadow: 0px 0px 3px 1px rgb(167, 223, 213);
+    box-shadow: 0px 0px 3px 1px rgb(167, 223, 213);
+}
+
+.items div i {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+

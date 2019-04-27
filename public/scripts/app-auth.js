@@ -16,6 +16,8 @@ const auth = firebase.auth();
 var shopping_cart = document.getElementById("shoppingCart");
 var booked_show = document.getElementById("bookedShow");
 
+var cartItemsArr = [];
+
 // add event listener
 btnSignOut.addEventListener("click", function(){
     firebase.auth().signOut().then(function() {
@@ -78,42 +80,53 @@ function getCurrentUser(user){
                 .catch(function(error) {
                     console.error("Error adding document: ", error);
                 }); 
-            
-            var shopRef = db.collection("users").doc(user.email).collection("shoppingCart").doc("default");
-            var bookRef = db.collection("users").doc(user.email).collection("bookedTickets").doc("default");
-
-            shopRef.get().then(function(doc){
-                if(!doc.exists){
-                    shopRef.set({
-                        items: [0]
-                    }, { merge: true }).then(function() {
-                        console.log("Shopping Cart Document has been create");
-                    })
-                    .catch(function(error) {
-                        console.error("Error adding document: ", error);
-                    }); 
-                }
-            });
-
-            shopRef.get().then(function(doc){
-                if(!doc.exists){
-                    bookRef.set({
-                        items: [0]
-                    }, { merge: true }).then(function() {
-                        console.log("Booked Ticket Document has been create");
-                    })
-                    .catch(function(error) {
-                        console.error("Error adding document: ", error);
-                    });
-                }
-            });
-
+            create_initial_shop_doc();
         }
         else{
-            console.log('There is no current user');
+            console.log("The user is not new");
+            // displayShoppingCart();
+            db.collection("users").doc(email).collection("shoppingCart").doc("default").get()
+            .then(function(doc){
+                if(doc.data().items.length > 1){
+                    for(var i = 1; i < doc.data().items.length; i++){
+                        cartItemsArr.push(doc.data().items[i]);
+                    }
+                }
+            });
         }
-        displayShoppingCart();
     }
+}
+
+function create_initial_shop_doc(){
+    var shopRef = db.collection("users").doc(user.email).collection("shoppingCart").doc("default");
+    shopRef.get().then(function(doc){
+        if(!doc.exists){
+            shopRef.set({
+                items: [0]
+            }, { merge: true }).then(function() {
+                console.log("Shopping Cart Document has been create");
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            }); 
+        }
+    });
+}
+
+function create_initial_tick_doc(){
+    var bookRef = db.collection("users").doc(user.email).collection("bookedTickets").doc("default");
+    shopRef.get().then(function(doc){
+        if(!doc.exists){
+            bookRef.set({
+                items: [0]
+            }, { merge: true }).then(function() {
+                console.log("Booked Ticket Document has been create");
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+        }
+    });
 }
 
 
@@ -125,16 +138,16 @@ function displayShoppingCart(){
             if(showClass === (doc.data().items.length - 1)){
                 console.log("No items in shopping cart");
             }
-            else if((doc.data().items.length- 1 - showClass) > 1){
+            else if((doc.data().items.length - 1 - showClass) > 1){
                 // There are more document that's not added
-                for(var i = 1; i <= doc.data().items.length; i++){
-                    shopping_cart.innerHTML += `<div class="shows"><h5>${doc.data().items[i].ShowName}</h5><p>${doc.data().items[i].ShowDate} at ${doc.data().items[i].ShowTime}</p><p>${doc.data().items[i].Quantity} with a price of $${doc.data().items[i].TierPrice}</p><p><strong>Subtotal:</strong> $${doc.data().items[i].itemSubtotal}</p></div>`;
+                for(var i = 1; i < doc.data().items.length; i++){
+                    add_items_ui(doc, i);
                 }
             }
             else if((doc.data().items.length - 1 - showClass) == 1){
                 shopping_cart.innerHTML = "";
                 for(var i = 1; i <= doc.data().items.length; i++){
-                    shopping_cart.innerHTML += `<div class="shows"><h5>${doc.data().items[i].ShowName}</h5><p>${doc.data().items[i].ShowDate} at ${doc.data().items[i].ShowTime}</p><p>${doc.data().items[i].Quantity} with a price of $${doc.data().items[i].TierPrice}</p><p><strong>Subtotal:</strong> $${doc.data().items[i].itemSubtotal}</p></div>`;
+                    add_items_ui(doc, i);
                 }
             }
             document.getElementById("number").innerHTML = doc.data().items.length - 1;
@@ -145,6 +158,64 @@ function displayShoppingCart(){
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });
+}
+
+function add_items_ui(document, index){
+    shopping_cart.innerHTML += `<div class="shows" id=${"show" + String(index)}>
+    <i class="fas fa-trash" id=${"trash" + String(index)} onclick="remove(this.id); reload();"></i>
+    <h5>${document.data().items[index].ShowName}</h5>
+    <p>${document.data().items[index].ShowDate} at ${document.data().items[index].ShowTime}</p>
+    <p>${document.data().items[index].Quantity} with a price of $${document.data().items[index].TierPrice}</p>
+    <p><strong>Subtotal:</strong> $${document.data().items[index].itemSubtotal}</p></div>`;
+}
+
+
+// Having problems with remove;
+// function remove(id){
+//     var indexOfShoppingCart = id.slice(-1);
+//     // var shoppingCartRef = db.collection("users").doc(email).collection("shoppingCart").doc("default");
+
+//     cartItemsArr.splice(indexOfShoppingCart, 1);
+//     db.collection("users").doc(email).collection("shoppingCart").doc("default").delete().then(function() {
+//         console.log("Document successfully deleted!");
+//     }).catch(function(error) {
+//         console.error("Error removing document: ", error);
+//     });
+//     // create the shopping cart default docment again
+//     create_initial_shop_doc();
+//     // update the default document
+//     function put_back_array(){
+//         for(var i = 0; i <= cartItemsArr.length; i++){
+//             db.collection("users").doc(email).collection("shoppingCart").doc("default").update({
+//                 items: firebase.firestore.FieldValue.arrayUnion({
+//                     'ShowName': cartItemsArr[i].ShowName,
+//                     'ShowDate': cartItemsArr[i].ShowDate,
+//                     'ShowTime': cartItemsArr[i].ShowTime,
+//                     'TierPrice': cartItemsArr[i].TierPrice,
+//                     'Quantity': cartItemsArr[i].Quantity,
+//                     'itemSubtotal': cartItemsArr[i].itemSubtotal
+//                 })
+//             });
+//         }
+
+//     }
+// }
+
+//     put_back_array();
+
+//     shopping_cart.innerHTML = "";
+//     db.collection("users").doc(email).collection("shoppingCart").doc("default").get()
+//     .then(function(doc){
+//         if (doc.exists) {
+//             for(var i = 1; i < doc.data().items.length; i++){
+//                 add_items_ui(doc, i);
+//             }
+//         }
+//     });
+// }
+
+function reload(){
+    setTimeout(function(){ location.reload(); });
 }
 
 function isNewUser(u){

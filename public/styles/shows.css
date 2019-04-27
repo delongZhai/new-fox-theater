@@ -84,28 +84,4 @@ div h2, div em {
   font-weight: 600;
 }
 
-.shows p{
-  display: block;
-  text-align: right;
-  padding-right: 20px;
-  margin-block-start: 0em;
-  margin-block-end: 0em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-}   
 
-.shows:hover{
-  background: azure;
-}
-
-.dropdown-menu h4, .dropdown-menu h5{
-  font-weight: 600;
-}
-
-.dropdown-menu {
-  overflow-y: scroll;
-}
-
-#checkout a {
-  color: white;
-}

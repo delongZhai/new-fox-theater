@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+    <script src="scripts/init.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Checkout</title>
+
+    <!-- Adding Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="styles/checkout.css" />
+</head>
+<body>
+    <!-- Navbar -- Needs to be consistent-->
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="logo">
+            <img src="image/logo.png" alt="Company's Logo">
+        </div>
+        <div class="anchor">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shows.html">Show</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>  
+        <div class="profile">
+            <button class="btn-signin" id="btn-signin" onclick="handle_signin()">      
+                SIGN IN
+            </button>
+            <!-- Example single danger button -->
+            <div class="btn-group" id="btn-profile">
+                <button type="button" class="btn btn-primary dropdown-toggle" onclick="displayShoppingCart()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Welcome, <span id="profile-user-name"><strong>username</strong></span>
+                </button>
+            <div class="dropdown-menu">
+                <h4 class="dropdown-item">You have <span id="number"></span> in shopping cart</h4>
+                <div class="dropdown-item">
+                    <h5>Shopping Cart</h5>
+                    <div id="shoppingCart"></div>
+                </div>
+                <div class="dropdown-item">
+                    <h5>Booked Shows</h5>
+                    <div id="bookedShow"></div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <button class="btn btn-signout" id="btn-signout">SIGN OUT</button>     
+                <button class="btn btn-primary" id="checkout" type="submit" target="_self">
+                    <a href="checkout.html">CHECKOUT NOW</a>
+                </button>   
+            </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Taking the payment from User -->
+        <div class="row" id="slide1">
+            <div class="col">
+                <div>
+                    <h1>Your Checkout Page <sub>step 1 of 3</sub></h1>
+                    <button type="button" class="btn btn-info">NEXT</button>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <ol id="listItems">
+
+                        </ol>
+                    </div>
+                    <form action="#" class="col-6">
+                        <h3>Your Payment Details</h3>
+                        <h4>Total Price of your Purchases is <span id="total"></span></h4>
+                        <h6>We support <strong>credit card payments</strong></h6>
+                        <hr>
+                        <div>
+                            <label for="fromCCName">Name on card</label>
+                            <input name="ccname" id="fromCCName" type="text" required placeholder="Full Name">        
+                        </div>
+                        <div>
+                            <label for="fromCCnum">Card Number</label>
+                            <input name="cardnumber" id="fromCCnum" type="text" onkeypress="return checkDigit(event)" required maxlength="19" minlength="15">
+                        </div>
+                        <div>
+                            <label for="fromCCCVC">CVC</label>
+                            <input name="cvc" id="fromCCCVC" type="tel" pattern="\d*" required>
+                        </div>
+                        <div>
+                            <label for="fromCCExp">Expiry</label>
+                            <input name="cc-exp" id="fromCCExp" type="tel" pattern="\d*" required placeholder="MM-YYYY">
+                        </div>
+                        <div class="button-center">
+                            <button type="button" class="btn btn-primary">SUBMIT</button>
+                        </div>            
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Verifying if the payment information is correct -->
+        <div class="row" id="slide2">
+            <div class="col">
+                <div>
+                    <h1>Your Checkout Page <sub>step 1 of 3</sub></h1>
+                    <button type="button" class="btn btn-info">NEXT</button>
+                </div>
+            </div>
+        </div>
+        <!-- Print the information in a receipt -->
+        <div class="row" id="slide3">
+            <div class="col">
+                <div>
+                    <h1>Your Checkout Page <sub>step 1 of 3</sub></h1>
+                    <button type="button" class="btn btn-info">NEXT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="/__/firebase/5.10.0/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="/__/firebase/5.10.0/firebase-auth.js"></script>
+    <script src="/__/firebase/5.10.0/firebase-firestore.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+
+    <!-- Self script files -->
+    <script src="scripts/app-auth.js"></script>
+    <script src="scripts/app-checkout.js"></script>
+</body>
+</html>

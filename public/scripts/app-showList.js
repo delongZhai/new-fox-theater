@@ -127,7 +127,14 @@ const addShoppingCart = function(){
             reset_tier();
             document.getElementById("alert-addCart").style.display = "block";
             setTimeout(function(){ document.getElementById("alert-addCart").style.display = "none"; }, 4000);
-            
+            cartItemsArr.push({
+                ShowName: selectedEvent.Title,
+                ShowDate: show_date.innerHTML,
+                ShowTime: selectedEvent.Time,
+                TierPrice: tierPrice,
+                Quantity: ticket_quan.value,
+                itemSubtotal: itemSubtotal   
+            });
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);
