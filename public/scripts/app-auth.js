@@ -1,5 +1,4 @@
 var db = firebase.firestore();
-var docRef = db.collection('users');
 
 // Creating variable
 var show_username = document.getElementById('profile-user-name');
@@ -162,7 +161,6 @@ function displayShoppingCart(){
 
 function add_items_ui(document, index){
     shopping_cart.innerHTML += `<div class="shows" id=${"show" + String(index)}>
-    <i class="fas fa-trash" id=${"trash" + String(index)} onclick="remove(this.id); reload();"></i>
     <h5>${document.data().items[index].ShowName}</h5>
     <p>${document.data().items[index].ShowDate} at ${document.data().items[index].ShowTime}</p>
     <p>${document.data().items[index].Quantity} with a price of $${document.data().items[index].TierPrice}</p>
@@ -171,51 +169,16 @@ function add_items_ui(document, index){
 
 
 // Having problems with remove;
-// function remove(id){
-//     var indexOfShoppingCart = id.slice(-1);
-//     // var shoppingCartRef = db.collection("users").doc(email).collection("shoppingCart").doc("default");
-
-//     cartItemsArr.splice(indexOfShoppingCart, 1);
-//     db.collection("users").doc(email).collection("shoppingCart").doc("default").delete().then(function() {
-//         console.log("Document successfully deleted!");
-//     }).catch(function(error) {
-//         console.error("Error removing document: ", error);
-//     });
-//     // create the shopping cart default docment again
-//     create_initial_shop_doc();
-//     // update the default document
-//     function put_back_array(){
-//         for(var i = 0; i <= cartItemsArr.length; i++){
-//             db.collection("users").doc(email).collection("shoppingCart").doc("default").update({
-//                 items: firebase.firestore.FieldValue.arrayUnion({
-//                     'ShowName': cartItemsArr[i].ShowName,
-//                     'ShowDate': cartItemsArr[i].ShowDate,
-//                     'ShowTime': cartItemsArr[i].ShowTime,
-//                     'TierPrice': cartItemsArr[i].TierPrice,
-//                     'Quantity': cartItemsArr[i].Quantity,
-//                     'itemSubtotal': cartItemsArr[i].itemSubtotal
-//                 })
-//             });
-//         }
-
-//     }
-// }
-
-//     put_back_array();
-
-//     shopping_cart.innerHTML = "";
-//     db.collection("users").doc(email).collection("shoppingCart").doc("default").get()
-//     .then(function(doc){
-//         if (doc.exists) {
-//             for(var i = 1; i < doc.data().items.length; i++){
-//                 add_items_ui(doc, i);
-//             }
-//         }
-//     });
-// }
-
-function reload(){
-    setTimeout(function(){ location.reload(); });
+function remove(){
+    db.collection("users").doc(email).collection("shoppingCart").doc("default").delete().then(function() {
+        console.log("Document successfully deleted!");
+        shopping_cart.innerHTML = "";
+        create_initial_shop_doc();
+        setTimeout(function(){ location.reload(); });
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+    // create the shopping cart default docment again
 }
 
 function isNewUser(u){

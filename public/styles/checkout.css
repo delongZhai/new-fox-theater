@@ -26,7 +26,8 @@ h4, h3{
 .btn-info{
     float: right;
     position: relative;
-    bottom: 40px;
+    bottom: 54px;
+    margin-right: 10px;
 }
 
 form{

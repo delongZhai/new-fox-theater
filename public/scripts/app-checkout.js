@@ -10,7 +10,7 @@ window.onload = function(){
                 if(doc.exists){
                     for(var i = 1; i < doc.data().items.length; i++){
                         total += doc.data().items[i].itemSubtotal;
-                        domListItems.innerHTML += `<li class="items"><div><strong>Show Title: </strong><i class="fas fa-trash"></i>${doc.data().items[i].ShowName}</div> <div><strong>Unit Price: </strong>${doc.data().items[i].TierPrice}</div><div><strong>Quantity: </strong>${doc.data().items[i].Quantity}</div> <div><strong>Subtotal is:</strong><h5>$${doc.data().items[i].itemSubtotal}</h5></div></li>`;
+                        domListItems.innerHTML += `<li class="items"><div><strong>Show Title: </strong>${doc.data().items[i].ShowName}</div> <div><strong>Unit Price: </strong>${doc.data().items[i].TierPrice}</div><div><strong>Quantity: </strong>${doc.data().items[i].Quantity}</div> <div><strong>Subtotal is:</strong><h5>$${doc.data().items[i].itemSubtotal}</h5></div></li>`;
                     }
                 } else{
                     console.log("Cannot get such document");

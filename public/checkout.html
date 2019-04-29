@@ -46,6 +46,7 @@
                 <h4 class="dropdown-item">You have <span id="number"></span> in shopping cart</h4>
                 <div class="dropdown-item">
                     <h5>Shopping Cart</h5>
+                    <i class="fas fa-trash" onclick="remove()"></i>
                     <div id="shoppingCart"></div>
                 </div>
                 <div class="dropdown-item">
@@ -69,42 +70,42 @@
                 <div>
                     <h1>Your Checkout Page <sub>step 1 of 3</sub></h1>
                     <button type="button" class="btn btn-info">NEXT</button>
+                    <button type="button" class="btn btn-info" onclick="remove()">Clear Shopping Cart</button>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <ol id="listItems">
-
-                        </ol>
-                    </div>
-                    <form action="#" class="col-6">
-                        <h3>Your Payment Details</h3>
-                        <h4>Total Price of your Purchases is <span id="total"></span></h4>
-                        <h6>We support <strong>credit card payments</strong></h6>
-                        <hr>
-                        <div>
-                            <label for="fromCCName">Name on card</label>
-                            <input name="ccname" id="fromCCName" type="text" required placeholder="Full Name">        
-                        </div>
-                        <div>
-                            <label for="fromCCnum">Card Number</label>
-                            <input name="cardnumber" id="fromCCnum" type="text" onkeypress="return checkDigit(event)" required maxlength="19" minlength="15">
-                        </div>
-                        <div>
-                            <label for="fromCCCVC">CVC</label>
-                            <input name="cvc" id="fromCCCVC" type="tel" pattern="\d*" required>
-                        </div>
-                        <div>
-                            <label for="fromCCExp">Expiry</label>
-                            <input name="cc-exp" id="fromCCExp" type="tel" pattern="\d*" required placeholder="MM-YYYY">
-                        </div>
-                        <div class="button-center">
-                            <button type="button" class="btn btn-primary">SUBMIT</button>
-                        </div>            
-                    </form>
-                </div>
-                
             </div>
+            <div class="w-100"></div>
+            <div class="col-6">
+                <ol id="listItems">
+                </ol>
+            </div>
+            <div class="col-6"></div>
+            <form action="#" class="col-6">
+                <h3>Your Payment Details</h3>
+                <h4>Total Price of your Purchases is $<span id="total"></span></h4>
+                <h6>We support <strong>credit card payments</strong></h6>
+                <hr>
+                <div>
+                    <label for="fromCCName">Name on card</label>
+                    <input name="ccname" id="fromCCName" type="text" required placeholder="Full Name">        
+                </div>
+                <div>
+                    <label for="fromCCnum">Card Number</label>
+                    <input name="cardnumber" id="fromCCnum" type="text" onkeypress="return checkDigit(event)" required maxlength="19" minlength="15">
+                </div>
+                <div>
+                    <label for="fromCCCVC">CVC</label>
+                    <input name="cvc" id="fromCCCVC" type="tel" pattern="\d*" required>
+                </div>
+                <div>
+                    <label for="fromCCExp">Expiry</label>
+                    <input name="cc-exp" id="fromCCExp" type="tel" pattern="\d*" required placeholder="MM-YYYY">
+                </div>
+                <div class="button-center">
+                    <button type="button" class="btn btn-primary">SUBMIT</button>
+                </div>            
+            </form>
         </div>
+    </div>
         <!-- Verifying if the payment information is correct -->
         <div class="row" id="slide2">
             <div class="col">
