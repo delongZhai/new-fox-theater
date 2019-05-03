@@ -123,3 +123,11 @@ li a:hover{
 #checkout a {
   color: white;
 }
+
+.fa-trash{
+  font-size: 1.25rem;
+
+  position: absolute;
+  top: 15px;
+  right: 25px;
+}

@@ -42,8 +42,7 @@ div h2, div em {
 
 .col-6:first-of-type {
   border: 1px solid black;
-  border-radius: 5%;
-
+  border-radius: 5px;
 }
 
 .col-4{
@@ -76,8 +75,8 @@ div h2, div em {
   left: 20px;
 }
 
-.show-y-margin {
-  margin-bottom: 50px;
+.show-y-margin, .show-detail-tiershop h4{
+  margin: 0 40px;
 }
 
 .show-y-margin h6, h4{

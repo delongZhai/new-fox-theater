@@ -146,15 +146,7 @@ const addShoppingCart = function(){
     }
 };
 
-// const directCheckout = function(){
-//     if(firebase.auth().currentUser){
-//         addShoppingCart();
-//         var windowObjectReference = window.open("checkout.html", "You are at Checkout", "_self");
-//     }
-//     else{
-//         document.getElementById("alert-primary").style.display = "block";
-//     }
-// };
+
 
 function return_email(){
     return firebase.auth().currentUser.email;

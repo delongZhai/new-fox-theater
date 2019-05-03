@@ -38,24 +38,25 @@
             </button>
             <!-- Example single danger button -->
             <div class="btn-group" id="btn-profile">
-                <button type="button" class="btn btn-primary dropdown-toggle" onclick="displayShoppingCart()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-primary dropdown-toggle" onclick="displayShoppingCart(); displayBookedTicket()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Welcome, <span id="profile-user-name"><strong>username</strong></span>
                 </button>
             <div class="dropdown-menu">
-                <h4 class="dropdown-item">You have <span id="number"></span> in shopping cart</h4>
                 <div class="dropdown-item">
                     <h5>Shopping Cart</h5>
+                    <hr>
                     <i class="fas fa-trash" onclick="remove()"></i>
                     <div id="shoppingCart"></div>
                 </div>
                 <div class="dropdown-item">
                     <h5>Booked Shows</h5>
+                    <hr>
                     <div id="bookedShow"></div>
                 </div>
                 <div class="dropdown-divider"></div>
                 <button class="btn btn-signout" id="btn-signout">SIGN OUT</button>     
                 <button class="btn btn-primary" id="checkout" type="submit" target="_self">
-                    <a href="checkout.html">CHECKOUT NOW</a>
+                    <a href="checkout.html">GO CHECKOUT</a>
                 </button>   
             </div>
             </div>
@@ -107,8 +108,8 @@
                         <div class="alert alert-primary" id="alert-addCart" role="alert">
                             <p>You order has been added to the shopping cart.</div></p>
                         </div>
-                        <button class="btn btn-primary" id="checkout" type="submit" onclick="addShoppingCart()">
-                            <a href="checkout.html" id="checkoutPage">CHECKOUT NOW</a>
+                        <button class="btn btn-primary" id="checkout" type="submit">
+                            <a href="checkout.html" id="checkoutPage">GO CHECKOUT</a>
                         </button>
                         <button class="btn btn-light" id="toShopCart" type="submit" onclick="addShoppingCart()">
                             <i class="fas fa-shopping-cart"></i>

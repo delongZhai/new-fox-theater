@@ -23,23 +23,22 @@ h4, h3{
     font-weight: 600;
 }
 
-.btn-info{
+.btn-enter, .btn-danger{
     float: right;
     position: relative;
     bottom: 54px;
     margin-right: 10px;
 }
 
+.btn-enter{
+    min-width: 175px;
+    display: block;
+}
+
 form{
     margin: auto;
     max-width: 600px;
     padding: 0px 70px;
-}
-
-form:hover{
-    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
 }
 
 form.col-6{
@@ -65,7 +64,6 @@ form label{
 }
 
 form input{
-    margin-right: 50px;
     float: right;
     width: 225px;
 }
@@ -90,18 +88,6 @@ ol{
     padding-inline-start: 0px;
 }
 
-#listItems .items{
-    position: relative;
-    top: 0;
-    width: 40%;
-    height: 150px;
-    display: block;
-    float: left;
-    background: azure;
-    padding: 10px;
-    margin: 20px 20px;
-}
-
 li div:last-of-type strong{
     padding-right: 20px;
 }
@@ -116,15 +102,62 @@ li div:last-of-type h5{
     text-align: right;
 }
 
-.items:hover{
-    -webkit-box-shadow: 0px 0px 3px 1px rgb(167, 223, 213);
-    -moz-box-shadow: 0px 0px 3px 1px rgb(167, 223, 213);
-    box-shadow: 0px 0px 3px 1px rgb(167, 223, 213);
+table{
+    min-width: 800px;
+    margin: 40px auto;
+    padding: 0px;
+    text-align: center;
 }
 
-.items div i {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+thead{
+    border-bottom: 1px solid skyblue;
+    font-size: 18px;
 }
 
+tbody tr td:last-of-type{
+    border-left: 1px solid skyblue;
+}
+
+thead tr{
+    font-weight: 800;
+}
+
+#cardInfo {
+    width: 700px;
+    margin: 30px auto;
+}
+
+#cardInfo p {
+    display: block;
+    margin-bottom: 0rem;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    text-align: left;
+}
+
+#cardInfo span{
+    font-weight: normal;
+    padding-left: 80px;
+}
+
+#cardInfo #confirm, #confirmed button{
+    display: block;
+    margin: auto;
+    min-width: 150px;
+}
+
+#confirmed{
+    display: none;
+}
+
+.shows p {
+    margin: 0;
+    display: block;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}

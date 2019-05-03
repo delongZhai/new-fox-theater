@@ -83,7 +83,6 @@ function getCurrentUser(user){
         }
         else{
             console.log("The user is not new");
-            // displayShoppingCart();
             db.collection("users").doc(email).collection("shoppingCart").doc("default").get()
             .then(function(doc){
                 if(doc.data().items.length > 1){
@@ -112,30 +111,13 @@ function create_initial_shop_doc(){
     });
 }
 
-function create_initial_tick_doc(){
-    var bookRef = db.collection("users").doc(user.email).collection("bookedTickets").doc("default");
-    shopRef.get().then(function(doc){
-        if(!doc.exists){
-            bookRef.set({
-                items: [0]
-            }, { merge: true }).then(function() {
-                console.log("Booked Ticket Document has been create");
-            })
-            .catch(function(error) {
-                console.error("Error adding document: ", error);
-            });
-        }
-    });
-}
-
-
 function displayShoppingCart(){
     db.collection("users").doc(email).collection("shoppingCart").doc("default").get()
     .then(function(doc){
         if (doc.exists) {
             var showClass = document.getElementsByClassName("shows").length;
             if(showClass === (doc.data().items.length - 1)){
-                console.log("No items in shopping cart");
+                console.log("No Problem!");
             }
             else if((doc.data().items.length - 1 - showClass) > 1){
                 // There are more document that's not added
@@ -149,13 +131,28 @@ function displayShoppingCart(){
                     add_items_ui(doc, i);
                 }
             }
-            document.getElementById("number").innerHTML = doc.data().items.length - 1;
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
+    });
+}
+
+function displayBookedTicket(){
+    db.collection("users").doc(email).collection("bookedTickets").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            booked_show.innerHTML += `<div class="orders">
+            <h5>Shows for Order Number <br> ${doc.id}</h5></div>"`;
+            for(var i = 0; i < doc.data().items.length; i++){
+                booked_show.innerHTML += `<div class="shows"><h5>Title: ${doc.data().items[i].ShowName}</h5>
+                <p>${doc.data().items[i].ShowDate} at ${doc.data().items[i].ShowTime}</p>
+                <p>You bought <strong>${doc.data().items[i].Quantity}</strong> tickets </p></div>`;
+            }
+        });
     });
 }
 
@@ -167,18 +164,17 @@ function add_items_ui(document, index){
     <p><strong>Subtotal:</strong> $${document.data().items[index].itemSubtotal}</p></div>`;
 }
 
-
 // Having problems with remove;
 function remove(){
     db.collection("users").doc(email).collection("shoppingCart").doc("default").delete().then(function() {
         console.log("Document successfully deleted!");
         shopping_cart.innerHTML = "";
         create_initial_shop_doc();
-        setTimeout(function(){ location.reload(); });
     }).catch(function(error) {
         console.error("Error removing document: ", error);
     });
     // create the shopping cart default docment again
+    create_initial_shop_doc();
 }
 
 function isNewUser(u){

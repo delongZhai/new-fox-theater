@@ -68,63 +68,124 @@
         <div class="row" id="slide1">
             <div class="col">
                 <div>
-                    <h1>Your Checkout Page <sub>step 1 of 3</sub></h1>
-                    <button type="button" class="btn btn-info">NEXT</button>
-                    <button type="button" class="btn btn-info" onclick="remove()">Clear Shopping Cart</button>
+                    <h1>Checkout:</h1>
+                    <button type="button" class="btn btn-danger" onclick="remove()">CLEAR CART</button>
+                    <button type="button" class="btn btn-enter btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        ENTER PAYMENT
+                    </button>
                 </div>
             </div>
             <div class="w-100"></div>
-            <div class="col-6">
-                <ol id="listItems">
-                </ol>
+            <div class="col">
+                <h4>Here Are Your Items In Shopping Cart</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <td id="showTitle">Show Title</td>
+                            <td id="">Unit Price</td>
+                            <td>Quantity</td>
+                            <td><strong>Subtotal</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody id="listItems">
+
+                    </tbody>
+                </table>
             </div>
-            <div class="col-6"></div>
-            <form action="#" class="col-6">
-                <h3>Your Payment Details</h3>
-                <h4>Total Price of your Purchases is $<span id="total"></span></h4>
-                <h6>We support <strong>credit card payments</strong></h6>
-                <hr>
-                <div>
-                    <label for="fromCCName">Name on card</label>
-                    <input name="ccname" id="fromCCName" type="text" required placeholder="Full Name">        
+            <div class="w-100"></div>
+            <div class="col" id="confirming">
+                <h4>Please Confirm Your Credit Card Information</h4>
+                <script>var payment = JSON.parse(sessionStorage.paymentDetails);</script>
+                <div id="cardInfo">
+                    <p>Card Number: 
+                        <span id="cardNumber">
+                            <script>document.getElementById('cardNumber').innerHTML = "...." + payment.CardNumber.slice(-4);</script>
+                        </span>
+                    </p>
+                    <p>Card Holder: 
+                        <span id="cardHolder">
+                            <script>document.getElementById('cardHolder').innerHTML = payment.Cardholder;</script>
+                        </span>
+                    </p>
+                    <p>Card Number: 
+                        <span id="cardCVC">
+                            <script>document.getElementById('cardCVC').innerHTML = payment.CVC;</script>
+                        </span>
+                    </p>
+                    <p>Card Number: 
+                        <span id="cardExpiration">
+                            <script>document.getElementById('cardExpiration').innerHTML = payment.Expiration;</script>
+                        </span>
+                    </p>
+                    <p>Tax: <span>0</span></p>
+                    <p>Total: 
+                        <span id="totalPrice"></span>
+                    </p>
                 </div>
-                <div>
-                    <label for="fromCCnum">Card Number</label>
-                    <input name="cardnumber" id="fromCCnum" type="text" onkeypress="return checkDigit(event)" required maxlength="19" minlength="15">
+                <button type="button" class="btn btn-primary" id="confirm" disabled style="display: block; margin: auto;" onclick="confirm()">
+                    <script>
+                        function turnoff_disabled(){
+                            if(payment.CardNumber.length < 15){
+                                document.getElementById("confirm").disabled = true;
+                            }
+                            else{
+                                document.getElementById("confirm").disabled = false;
+                            }
+                        }
+                        turnoff_disabled();    
+                    </script>
+                    CONFIRM
+                </button>
+                <div id="confirmed">
+                    <h3>You have completed your transaction</h3>
+                    <button type="button" class="btn btn-info" onclick="window.print()">PRINT RECEIPT</button>
                 </div>
-                <div>
-                    <label for="fromCCCVC">CVC</label>
-                    <input name="cvc" id="fromCCCVC" type="tel" pattern="\d*" required>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Make A Payment</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" class="col">
+                                <h3>Your Payment Details</h3>
+                                <h4>Total Price of your Purchases is $<span id="total"></span></h4>
+                                <h6>We support <strong>credit card payments</strong></h6>
+                                <hr>
+                                <div>
+                                    <label for="CCname">Name on card</label>
+                                    <input name="ccname" id="CCname" type="text" required placeholder="Full Name">        
+                                </div>
+                                <div>
+                                    <label for="CCnum">Card Number</label>
+                                    <input name="cardnumber" id="CCnum" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required maxlength="19" minlength="15">
+                                </div>
+                                <div>
+                                    <label for="CVC">CVC</label>
+                                    <input name="cvc" id="CVC" type="tel" minlength="3" maxlength="3" required>
+                                </div>
+                                <div>
+                                    <label for="CCExp">Expiry</label>
+                                    <input name="cc-exp" id="CCExp" type="month" required placeholder="MM-YYYY" min="2019-05">
+                                </div>
+                                <div class="button-center">
+                                    <button id="ccSubmit"> SUBMIT </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="fromCCExp">Expiry</label>
-                    <input name="cc-exp" id="fromCCExp" type="tel" pattern="\d*" required placeholder="MM-YYYY">
-                </div>
-                <div class="button-center">
-                    <button type="button" class="btn btn-primary">SUBMIT</button>
-                </div>            
-            </form>
+            </div>
         </div>
     </div>
-        <!-- Verifying if the payment information is correct -->
-        <div class="row" id="slide2">
-            <div class="col">
-                <div>
-                    <h1>Your Checkout Page <sub>step 1 of 3</sub></h1>
-                    <button type="button" class="btn btn-info">NEXT</button>
-                </div>
-            </div>
-        </div>
-        <!-- Print the information in a receipt -->
-        <div class="row" id="slide3">
-            <div class="col">
-                <div>
-                    <h1>Your Checkout Page <sub>step 1 of 3</sub></h1>
-                    <button type="button" class="btn btn-info">NEXT</button>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
