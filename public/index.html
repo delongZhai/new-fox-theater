@@ -58,19 +58,21 @@
                 Welcome, <span id="profile-user-name"><strong>username</strong></span>
                 </button>
             <div class="dropdown-menu">
-                <h4 class="dropdown-item">You have <span id="number"></span> in shopping cart</h4>
                 <div class="dropdown-item">
                     <h5>Shopping Cart</h5>
+                    <hr>
+                    <i class="fas fa-trash" onclick="remove()"></i>
                     <div id="shoppingCart"></div>
                 </div>
                 <div class="dropdown-item">
                     <h5>Booked Shows</h5>
+                    <hr>
                     <div id="bookedShow"></div>
                 </div>
                 <div class="dropdown-divider"></div>
                 <button class="btn btn-signout" id="btn-signout">SIGN OUT</button>     
                 <button class="btn btn-primary" id="checkout" type="submit" target="_self">
-                    <a href="checkout.html">CHECKOUT NOW</a>
+                    <a href="checkout.html">GO CHECKOUT</a>
                 </button>   
             </div>
             </div>

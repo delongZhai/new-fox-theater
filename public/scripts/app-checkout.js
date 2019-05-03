@@ -56,6 +56,7 @@ function confirm(){
         console.error("Error adding document: ", error);
     });
     remove();
+    setTimeOut(function(){location.reload();})
 }
 
 window.onload = function(){

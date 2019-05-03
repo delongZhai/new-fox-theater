@@ -147,7 +147,7 @@ function displayBookedTicket(){
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
             booked_show.innerHTML += `<div class="orders">
-            <h5>Shows for Order Number <br> ${doc.id}</h5></div>"`;
+            <p>Shows for Order Number <br> ${doc.id}</p></div>`;
             for(var i = 0; i < doc.data().items.length; i++){
                 booked_show.innerHTML += `<div class="shows"><h5>Title: ${doc.data().items[i].ShowName}</h5>
                 <p>${doc.data().items[i].ShowDate} at ${doc.data().items[i].ShowTime}</p>
