@@ -1,13 +1,25 @@
 .container {
-  margin-top: 90px;
+  margin: 50px auto;
   width: 100%;
-  height: 1400px;
   overflow: y;
+  padding: 0 100px;
 }
 
-div h2, div em {
+.footer {
+  margin-top: 130px;
+  width: 100%;
+  background-color: transparent;
+  color: lightgray;
+  text-align: center;
+}
+
+div h2 {
   text-align: center;
   font-weight: 600;
+}
+
+#show-list .col-lg-4, #show-list .col-md-6, #show-list .col-sm-6, #show-list  .col-xs-12{
+  margin: 15px auto;
 }
 
 #decision .btn-primary {
@@ -28,6 +40,9 @@ div h2, div em {
   margin: 0px 5px;
 }
 
+h2, h4{
+  margin-bottom: 20px;
+}
 
 #go-back {
   display: none;
@@ -76,11 +91,89 @@ div h2, div em {
 }
 
 .show-y-margin, .show-detail-tiershop h4{
-  margin: 0 40px;
+  margin: 55px 40px;
 }
 
 .show-y-margin h6, h4{
   font-weight: 600;
 }
 
+#decision .btn {
+  margin-bottom: 50px;
+}
 
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+  right: 0;
+  height: 350px;
+  width: 350px;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #FF734D;
+}
+
+.col-lg-4:hover .overlay {
+  opacity: 0.9;
+}
+
+.col-lg-4 box {
+  opacity: 0.9;
+}
+
+.title { 
+  color: #FF734D;
+  text-transform: uppercase;
+}
+
+.text {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  width: 200px;
+  text-align: justify; 
+}
+
+.buy-btn{
+  color: #ffffff;
+  border: none;
+  position: relative;
+  left: 310px;
+  bottom: 60px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 2px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#show-list div .btn-primary{
+  background: #FF734D;
+}
+
+#show-detail-datetime img{
+  width: 100%;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+@media (min-width: 1200px){
+  .col-lg-6 {
+      width: 48%;
+      margin: auto 1%;
+  }
+}

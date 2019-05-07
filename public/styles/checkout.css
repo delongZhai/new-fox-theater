@@ -51,7 +51,7 @@ form h4{
     margin-top: 20px;
 }
 
-form h3, form h4, form h6{
+form h2, form h3, form h4{
     text-align: center;
 }
 form div{
@@ -59,7 +59,7 @@ form div{
 }
 
 form label{
-    margin-left: 70px;
+    margin-left: 30px;
     text-align: left;
 }
 
@@ -160,4 +160,24 @@ thead tr{
     margin-block-end: 0em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
+}
+
+.modal-body label{
+    margin-bottom: 10px;
+}
+
+h2#exampleModalLabel {
+    display: inline-block;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #FF734D;
+    border-color: #FF734D;
+}
+
+.btn-primary:hover{
+    color: #fff;
+    background-color: #FF734D;
+    border-color: #FF734D;
 }

@@ -45,7 +45,6 @@ function transition(){
 
 function confirm(){
     transition();
-    db.collection("users")
     db.collection("users").doc(email).collection("bookedTickets").add({
         items: cartItemsArr
     })

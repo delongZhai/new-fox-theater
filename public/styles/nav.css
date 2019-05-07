@@ -8,12 +8,46 @@ body {
   overflow: y;
 }
 
+.navbar {
+  height: 57px;
+  width: 100%;
+  border-bottom: 3px solid #FF734D;
+  margin-bottom: 0px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #1A1A1D;
+  border-radius: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  text-transform: capitalize;
+  color: white;
+  padding: 15px;
+  font-size: 1em;
+  transition: 0.4s;
+}
+
+.navbar a.active {
+  color: #FF734D;
+}
+
+.navbar a:hover {
+  opacity: 0.90;
+  color: #FC4445;
+  text-decoration: none;
+}
 
 div.logo img{
-  width: 60px;
+  width: 250px;
   position: relative;
-  top: -8px;
+  bottom: 5px;
   left: 20px;
+}
+
+.dropdown-menu button{
+  font-size: 1em;
 }
 
 div.anchor, div.logo {
@@ -24,11 +58,8 @@ ul {
   list-style-type: none;
   display: inline;
   margin: 0;
-  padding: 5.5px;
+  margin-left: 140px;
   overflow: hidden;
-  position: absolute;
-  top: 0px;
-  left: 110px;
   font-size: 2em;
 }
 
@@ -55,42 +86,66 @@ li a {
   color: #ffffff;
 }
 
-li a:hover{
-  background-color: rgb(225, 241, 74);
-  color: #000000;
+header .anchor a, .dropdown-toggle{
+  font-size: 0.7em;
 }
 
 .btn-signin { 
   color: #ffffff; 
-  /* add a function in javascript to change display to none once user sign in, then change display to initial display */
-  /* display: none; */
-  /* TODO: change this */
-  background-color: #007bff; 
-  border-color: #EEEDF2; 
+  background-color: #FF734D;
+  border: 1px solid #FF734D;
   font-size: 1.5em;
   text-align: center;
   padding: 5px 12px;
   cursor: pointer;
-  border-radius: 10px;
   position: absolute;
-  top:5px;
-  right: 25px;
+  top:-1px;
+  right: 0px;
+  height: 57px;
+  width: auto;
+  cursor: pointer;
 } 
 
 #btn-profile{
   visibility: hidden;
   font-size: 1.5em;
   text-align: center;
-  padding: 5px 12px;
   cursor: pointer;
-  border-radius: 10px;
   position: absolute;
-  top:8px;
-  right: 35px;
+  top: -2px;
+  right: -1px;
+}
+
+.profile .btn-group .btn{
+  height: 57px;
+}
+
+.profile .dropdown-menu .btn-orange {
+  position: relative;
+  left: 10px;
+}
+
+.profile .btn-group .btn-orange:hover{
+  background: #FF734D;
+  border: none;
+}
+
+.btn-orange{
+  background: #FF734D;
+  border: none;
+  color: #ffffff;
 }
 
 #alert-primary, #alert-addCart{
   display: none;
+}
+
+button#btn-signout{
+  padding: 0;
+}
+
+.dropdown-divider {
+  margin-bottom: 20px;
 }
 
 .shows p{
@@ -114,6 +169,16 @@ li a:hover{
 .dropdown-menu {
   overflow-y: scroll;
   left: -100px;
+  padding: 0 10px;
+  border: none;
+  margin: 0px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+.dropdown-menu .btn{
+  padding: 6px 12px;
 }
 
 #checkout {

@@ -222,11 +222,15 @@ function set_id(e){
 
 function add_show_to_html(e){
     // TODO: return HTML code for every show that has a value of true on onShowList
-    return `<div class="col-4">
-    <h2>${e.Title}</h2>
-    <p>${e.Description}</p>
-    <em>Available on ${e.Day} at ${e.Time}</em>
-    <button type="button" class="btn btn-primary btn-event" onclick="load_show(this.id); continue_to_details(); ">SHOP</button>
+    return `<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+    <img class="show1" src="${e.imgPath}"  width="350px" height="350px">
+    <div class="overlay">
+    <p class="text">${e.Description}</p>
+    </div>
+    <h4 class="title">${e.Title}</h4>
+    <p>Available on ${e.Day}</p>
+    <p>AT ${e.Time}</p>
+    <button type="button" class="btn btn-primary btn-event buy-btn" onclick="load_show(this.id); continue_to_details(); ">SHOP</button>
     </div>`;
 }
 
