@@ -43,8 +43,21 @@ function transition(){
     document.getElementById("confirmed").style.display = 'block';
 }
 
+function get_item_from_session(){
+    for(var i = 0; i < 10; i++){
+        if(sessionStorage.getItem(`cartItem${i}`) === null){
+            break;
+        }
+        else{
+            let item = JSON.parse(sessionStorage.getItem(`cartItem${i}`));
+            cartItemsArr.push(item);
+        }
+    }
+}
+
 function confirm(){
     transition();
+    get_item_from_session();
     db.collection("users").doc(email).collection("bookedTickets").add({
         items: cartItemsArr
     })

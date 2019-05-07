@@ -123,18 +123,26 @@ const addShoppingCart = function(){
         })
         .then(function() {
             console.log("New items document is written");
-            ticket_quan.value = "";
             reset_tier();
             document.getElementById("alert-addCart").style.display = "block";
             setTimeout(function(){ document.getElementById("alert-addCart").style.display = "none"; }, 4000);
-            cartItemsArr.push({
-                ShowName: selectedEvent.Title,
-                ShowDate: show_date.innerHTML,
-                ShowTime: selectedEvent.Time,
-                TierPrice: tierPrice,
-                Quantity: ticket_quan.value,
-                itemSubtotal: itemSubtotal   
-            });
+            for(var i = 0; i < 10; i++){
+                if(sessionStorage.getItem(`cartItem${i}`) === null){
+                    sessionStorage.setItem(`cartItem${i}`, JSON.stringify({
+                        ShowName: selectedEvent.Title,
+                        ShowDate: show_date.innerHTML,
+                        ShowTime: selectedEvent.Time,
+                        TierPrice: tierPrice,
+                        Quantity: ticket_quan.value,
+                        itemSubtotal: itemSubtotal  
+                    }));
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+            ticket_quan.value = "";
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);
