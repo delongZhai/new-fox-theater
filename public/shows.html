@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         
     <title>Shows</title>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
@@ -79,14 +80,16 @@
                     <p id="show-describe"></p>
                 </div>
                 <div class="col-lg-6 card" id="show-detail-tiershop">
-                    <h2>Our site offers two date options</h2>
+                    <!-- <h2>Our site offers two date options</h2> -->
+                    <h2>Choose Seat Tiers and Quantity</h2>
                     <div id="show-dayandtime" class="show-y-margin">
-                        <h4>Which date do you want to buy?</h4>
+                        <h4>Date and Time for this show</h4>
+                        <!-- <h4>Which date do you want to buy?</h4>
                         <select name="day" id="show-day" onchange="updateDate(this)" required>
                             <option>Please select day:</option>
-                        </select>
-                        <p id="show-time"></p>
+                        </select> -->
                         <p id="show-date"></p>
+                        <p id="show-time"></p>
                     </div>
                     <div id="show-tier-select" class="show-y-margin">
                         <h4>Which tier do you want?</h4>
@@ -99,7 +102,7 @@
                     </div>
                     <div id="show-ticket-quantity" class="show-y-margin">
                         <label for="ticketQuan"># of Ticket</label>
-                        <input type="number" name="quantity" placeholder="1" id="ticketQuan" value="1" min="1" required>
+                        <input type="number" name="quantity" placeholder="1" id="ticketQuan" value="1" min="1" max="5" required>
                     </div>
                     <div id="alert" class="show-y-margin">
                         <div class="alert alert-primary" id="alert-primary" role="alert">

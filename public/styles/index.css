@@ -12,7 +12,7 @@
 	
 .carousel-caption {
     z-index: 000;
-    margin: 300px auto;
+    margin: 500px auto 300px;
 	}
 	
 .carousel-caption h1 {
@@ -39,17 +39,17 @@
 	}
 	
 .carousel .carousel-inner .bg1 {
-	background-image:url('../image/carousel3.png');
+	background-image:url('../image/carousel1.png');
 	background-position: center top;
 	}
 	
 .carousel .carousel-inner .bg2 {
-	background-image:url('../image/carousel2.png');
+	background-image:url('../image/carousel3.png');
 	background-position: center center;
 	}
 	
 .carousel .carousel-inner .bg3 {
-	background-image:url('../image/carousel1.png');
+	background-image:url('../image/carousel2.png');
 	background-position: center top;
 	}
 	

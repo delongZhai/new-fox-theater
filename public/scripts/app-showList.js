@@ -62,25 +62,26 @@ function reassign_day(){
     }
 }
 
-function updateDate(sel){
-    reassign_day();
+// function uncalled
+// function updateDate(sel){
+//     reassign_day();
 
-    if(sel.options[sel.selectedIndex].value == "this_week"){
-        show_date.innerHTML = moment().day(day).format("dddd, MMMM Do YYYY");
-    }
-    else if(sel.options[sel.selectedIndex].value == "next_week"){
-        show_date.innerHTML = moment().day(day + 7).format("dddd, MMMM Do YYYY");
-    }
-    else if(sel.options[sel.selectedIndex].value == "two_weeks"){
-        show_date.innerHTML = moment().day(day + 14).format("dddd, MMMM Do YYYY");
-    }
-    else if(sel.options[sel.selectedIndex].value == "Please select day:"){
-        show_date.innerHTML = "";
-    }
-    else{
-        console.log("something unexpected happen in updateDate()");
-    }
-}
+//     if(sel.options[sel.selectedIndex].value == "this_week"){
+//         show_date.innerHTML = moment().day(day).format("dddd, MMMM Do YYYY");
+//     }
+//     else if(sel.options[sel.selectedIndex].value == "next_week"){
+//         show_date.innerHTML = moment().day(day + 7).format("dddd, MMMM Do YYYY");
+//     }
+//     else if(sel.options[sel.selectedIndex].value == "two_weeks"){
+//         show_date.innerHTML = moment().day(day + 14).format("dddd, MMMM Do YYYY");
+//     }
+//     else if(sel.options[sel.selectedIndex].value == "Please select day:"){
+//         show_date.innerHTML = "";
+//     }
+//     else{
+//         console.log("something unexpected happen in updateDate()");
+//     }
+// }
 
 // Get document from collection "shows"
 db.collection("shows").where("onShowList", "==", true)
@@ -217,7 +218,7 @@ function load_show(e){
     show_title.innerHTML = arrEvent[showIndex].Title;
     show_describe.innerHTML = arrEvent[showIndex].Description;
     document.getElementById("get-path").src = arrEvent[showIndex].imgPath;
-    show_time.innerHTML = "You selected" + " at " + arrEvent[showIndex].Time;
+    show_time.innerHTML = "You selected" + " at " + arrEvent[showIndex].Day + " on " + arrEvent[showIndex].Time;
     selected_index = showIndex;
 }
 
@@ -236,9 +237,9 @@ function add_show_to_html(e){
     <p class="text">${e.Description}</p>
     </div>
     <h4 class="title">${e.Title}</h4>
-    <p>Available on ${e.Day}</p>
-    <p>AT ${e.Time}</p>
-    <button type="button" class="btn btn-primary btn-event buy-btn" onclick="load_show(this.id); continue_to_details(); ">SHOP</button>
+    <p>${e.Day}</p>
+    <p>${e.Time}</p>
+    <button type="button" class="btn btn-primary btn-event buy-btn" onclick="load_show(this.id); continue_to_details(); ">BUY</button>
     </div>`;
 }
 
