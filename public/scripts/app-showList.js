@@ -218,7 +218,8 @@ function load_show(e){
     show_title.innerHTML = arrEvent[showIndex].Title;
     show_describe.innerHTML = arrEvent[showIndex].Description;
     document.getElementById("get-path").src = arrEvent[showIndex].imgPath;
-    show_time.innerHTML = "You selected" + " at " + arrEvent[showIndex].Day + " on " + arrEvent[showIndex].Time;
+    show_time.innerHTML = "You selected" + " on " + arrEvent[showIndex].Time;
+    show_date.innerHTML = arrEvent[showIndex].Day;
     selected_index = showIndex;
 }
 
@@ -237,7 +238,7 @@ function add_show_to_html(e){
     <p class="text">${e.Description}</p>
     </div>
     <h4 class="title">${e.Title}</h4>
-    <p>${e.Day}</p>
+    <p class="">${e.Day}</p>
     <p>${e.Time}</p>
     <button type="button" class="btn btn-primary btn-event buy-btn" onclick="load_show(this.id); continue_to_details(); ">BUY</button>
     </div>`;

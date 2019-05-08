@@ -2,6 +2,10 @@
 
 font-family: 'Roboto', sans-serif;
 
+.navbar-brand img {
+	url= "#home";
+}
+	
 body {
 	margin: 0; 
 	padding: 0;
@@ -74,8 +78,9 @@ button:hover {
 	}
 	
 .carousel-caption {
-    z-index: 000;
-    margin: 500px auto 300px;
+	z-index: 000;
+	position: relative;
+	margin: 190px;
 	}
 	
 .carousel-caption h1 {
@@ -89,7 +94,7 @@ button:hover {
 }
 
 .carousel .item {
-	background-color: #000000;
+	background-color: #777;
 	}
 
 .carousel-indicators {
@@ -99,23 +104,21 @@ button:hover {
 .carousel .carousel-inner .bg {
 	background-repeat:no-repeat;
 	background-size:cover;
-	height: 800px;
-	width: 100%;
 	}
 	
-.carousel .carousel-inner img:nth-of-type(1) {
+.carousel .carousel-inner .bg1 {
+	background-image:url('https://cdn.pixabay.com/photo/2016/05/06/17/06/ballet-1376250_1280.jpg');
 	background-position: center top;
 	}
 	
-.carousel .carousel-inner img:nth-of-type(2) {
-	background-position: center top;
+.carousel .carousel-inner .bg2 {
+	background-image:url('https://cdn.pixabay.com/photo/2017/08/01/21/47/dark-2568157_1280.jpg');
+	background-position: center center;
 	}
 	
-.carousel .carousel-inner img:nth-of-type(3) {
-	background-position: center bottom;
-	background-color: black;
-	background-size: cover;
-	height: 100%;
+.carousel .carousel-inner .bg3 {
+	background-image:url('https://cdn.pixabay.com/photo/2016/01/19/06/31/face-mask-1147977_1280.jpg');
+	background-position: center top;
 	}
 	
 .carousel .carousel-inner .btn-lg {
@@ -138,10 +141,4 @@ button:hover {
     background-color: white;
     color: lightgray;
     text-align: center;
-}
-
-@media screen and (min-width: 768px){
-	.carousel-indicators {
-		bottom: 80px;
-	}
 }
