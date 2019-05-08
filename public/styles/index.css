@@ -1,3 +1,7 @@
+@charset "utf-8"; 
+
+font-family: 'Roboto', sans-serif;
+
 .carousel, .item, .active {
 	height:100%;
 	}

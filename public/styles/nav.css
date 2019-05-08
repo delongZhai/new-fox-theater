@@ -1,5 +1,13 @@
+@charset "utf-8"; 
+
+font-family: 'Roboto', sans-serif;
+
 body {
+<<<<<<< HEAD
   font-family: 'Roboto', sans-serif;
+=======
+  font-family: Roboto, sans-serif;
+>>>>>>> 29b930513ae52a14d8625eb3126d649fbcdc401b
   font-size: 16px;
   margin: 0%;
   padding: 0%;
