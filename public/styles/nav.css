@@ -3,11 +3,7 @@
 font-family: 'Roboto', sans-serif;
 
 body {
-<<<<<<< HEAD
   font-family: 'Roboto', sans-serif;
-=======
-  font-family: Roboto, sans-serif;
->>>>>>> 29b930513ae52a14d8625eb3126d649fbcdc401b
   font-size: 16px;
   margin: 0%;
   padding: 0%;
@@ -26,6 +22,11 @@ body {
   z-index: 1000;
   background: #1A1A1D;
   border-radius: 0;
+}
+
+.btn-signout {
+  background: none;
+  font-weight: 700;
 }
 
 .navbar a {
@@ -183,6 +184,11 @@ button#btn-signout{
   position: absolute;
   top: 100%;
   right: 0;
+  width: 500;
+}
+
+button#checkout a {
+  padding: 0;
 }
 
 .dropdown-menu .btn{
